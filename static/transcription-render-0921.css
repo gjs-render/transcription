@@ -63,14 +63,16 @@ button:hover {
 }
 
 .custom-file-label {
-    background-color: #4CAF50;
-    color: white;
+    background-color: white; /* White background */
+    color: #333333; /* Dark grey text */
     padding: 10px 20px;
+    border: 1px solid #cccccc; /* Grey border */
     border-radius: 5px;
     cursor: pointer;
     display: inline-block;
     text-transform: lowercase; /* Ensures label text is lowercase */
     font-family: 'Roboto Mono', monospace;
 }
+
 
 
