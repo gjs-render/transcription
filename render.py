@@ -32,7 +32,7 @@ def generate_transcription():
         # Retrieve uploaded file
         audio = request.files['audio']
         if not audio:
-            return jsonify({'error': 'No audio file provided'}), 400
+            return jsonify({'error': ''}), 400
 
         # Save the audio file
         audio.save(audio_file_path)
