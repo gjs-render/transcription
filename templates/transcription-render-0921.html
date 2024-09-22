@@ -12,16 +12,32 @@
     <div class="main-container">
         <h1>chimpanda<br>transcription</h1>
         <form id="audioForm" enctype="multipart/form-data">
-            <input type="file" id="audioFile" accept="audio/*" required>
+            <!-- Hidden file input -->
+            <input type="file" id="audioFile" accept="audio/*" style="display:none;" required>
+
+            <!-- Custom label for the file input -->
+            <label for="audioFile" id="fileLabel" class="custom-file-label">choose file</label>
+
+            <!-- Button to trigger transcription generation -->
             <button type="button" id="generateTranscriptionBtn">generate transcription</button>
         </form>
+
+        <!-- Container to display the transcription -->
         <div id="transcriptionContainer" style="display: none;">
             <h3>Transcription:</h3>
             <p id="transcriptionText"></p>
         </div>
     </div>
 
+    <!-- JavaScript to handle file selection and transcription generation -->
     <script>
+        // Update the label when a file is selected
+        document.getElementById('audioFile').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || "choose file"; // Keeps label text in lowercase
+            document.getElementById('fileLabel').textContent = fileName;
+        });
+
+        // Handle transcription generation
         document.getElementById('generateTranscriptionBtn').addEventListener('click', function() {
             const audioFile = document.getElementById('audioFile').files[0];
             if (!audioFile) {
