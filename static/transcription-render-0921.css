@@ -62,3 +62,15 @@ button:hover {
     white-space: pre-wrap; /* Maintain text formatting */
 }
 
+.custom-file-label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    text-transform: lowercase; /* Ensures label text is lowercase */
+    font-family: 'Roboto Mono', monospace;
+}
+
+
