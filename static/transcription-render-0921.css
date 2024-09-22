@@ -62,6 +62,32 @@ button:hover {
     white-space: pre-wrap; /* Maintain text formatting */
 }
 
+/* Common button styles for both grey and blue buttons */
+.button {
+    width: 120px; /* Set width to 120px */
+    height: 30px; /* Set height to 30px */
+    line-height: 30px; /* Align text vertically */
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Roboto Mono', monospace;
+    text-align: center; /* Center the text horizontally */
+    text-transform: lowercase; /* Ensures label text is lowercase */
+    border: 1px solid #cccccc; /* Grey border for both */
+}
+
+/* Grey button */
+.button-grey {
+    background-color: white; /* White background */
+    color: #333333; /* Dark grey text */
+}
+
+/* Blue button */
+.button-blue {
+    background-color: #4CAF50; /* Blue or green background */
+    color: white; /* White text */
+}
+
 .custom-file-label {
     background-color: white; /* White background */
     color: #333333; /* Dark grey text */
@@ -75,7 +101,3 @@ button:hover {
     text-transform: lowercase; /* Ensures label text is lowercase */
     font-family: 'Roboto Mono', monospace;
 }
-
-
-
-
