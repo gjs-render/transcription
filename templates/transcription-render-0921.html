@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet">
+    <title>Chimpanda Transcription</title>
+    <link rel="stylesheet" type="text/css" href="/static/transcription-render-0921.css">
+</head>
 
+<body>
+    <div class="main-container">
+        <h1>Chimpanda Transcription</h1>
+        <form id="audioForm" enctype="multipart/form-data">
+            <input type="file" id="audioFile" accept="audio/*" required>
+            <button type="button" id="generateTranscriptionBtn">Generate Transcription</button>
+        </form>
+        <div id="transcriptionContainer" style="display: none;">
+            <h3>Transcription:</h3>
+            <p id="transcriptionText"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateTranscriptionBtn').addEventListener('click', function() {
+            const audioFile = document.getElementById('audioFile').files[0];
+            if (!audioFile) {
+                alert('Please upload an audio file');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('audio', audioFile);
+
+            fetch('/generate-transcription', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const transcriptionContainer = document.getElementById('transcriptionContainer');
+                const transcriptionText = document.getElementById('transcriptionText');
+                transcriptionText.textContent = data.transcript;
+                transcriptionContainer.style.display = 'block';
+            })
+            .catch(error => console.error('Error generating transcription:', error));
+        });
+    </script>
+</body>
+</html>
