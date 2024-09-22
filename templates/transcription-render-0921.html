@@ -42,30 +42,48 @@
             document.getElementById('fileLabel').textContent = fileName;
         });
 
-        // Handle transcription generation
-        document.getElementById('generateTranscriptionBtn').addEventListener('click', function() {
-            const audioFile = document.getElementById('audioFile').files[0];
-            if (!audioFile) {
-                alert('Please upload an audio file');
-                return;
-            }
+ // Handle transcription generation
+document.getElementById('generateTranscriptionBtn').addEventListener('click', function() {
+    const audioFile = document.getElementById('audioFile').files[0];
+    if (!audioFile) {
+        alert('Please upload an audio file');
+        return;
+    }
 
-            const formData = new FormData();
-            formData.append('audio', audioFile);
+    const formData = new FormData();
+    formData.append('audio', audioFile);
 
-            fetch('/generate-transcription', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const transcriptionContainer = document.getElementById('transcriptionContainer');
-                const transcriptionText = document.getElementById('transcriptionText');
-                transcriptionText.textContent = data.transcript;
-                transcriptionContainer.style.display = 'block';
-            })
-            .catch(error => console.error('Error generating transcription:', error));
-        });
+    fetch('/generate-transcription', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const transcriptionContainer = document.getElementById('transcriptionContainer');
+        const transcriptionText = document.getElementById('transcriptionText');
+
+        if (data.transcript) {
+            transcriptionText.value = data.transcript; // Set the value of the textarea
+            transcriptionContainer.style.display = 'block';
+        } else {
+            transcriptionText.value = "No transcription available.";
+            transcriptionContainer.style.display = 'block';
+        }
+    })
+    .catch(error => {
+        console.error('Error generating transcription:', error);
+        const transcriptionContainer = document.getElementById('transcriptionContainer');
+        const transcriptionText = document.getElementById('transcriptionText');
+        transcriptionText.value = "Error generating transcription. Please try again.";
+        transcriptionContainer.style.display = 'block';
+    });
+});
+
     </script>
 </body>
 </html>
