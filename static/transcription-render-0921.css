@@ -74,6 +74,7 @@ button:hover {
     text-align: center; /* Center the text horizontally */
     text-transform: lowercase; /* Ensures label text is lowercase */
     border: 1px solid #cccccc; /* Grey border for both */
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 /* Grey button */
